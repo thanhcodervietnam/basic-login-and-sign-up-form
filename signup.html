@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .notification {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 5px;
+            width: 80%;
+            text-align: center;
+            display: none;
+            margin-bottom: 20px;
+        }
+        .signup-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .signup-container h2 {
+            margin-bottom: 20px;
+        }
+        .signup-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .signup-container input {
+            width: 92%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .signup-container button {
+            width: 100.16%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block; /* Ensure button is always a block element */
+        }
+        .signup-container button:hover {
+            background-color: #af13c4;
+        }
+        .signup-container .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .signup-container .login-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .signup-container .login-link a:hover {
+            text-decoration: underline;
+        }
+        .signup-container .error-message {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+            text-align: left;
+            margin-bottom: 10px; /* Added margin bottom */
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        Congratulations! You have successfully signed up.
+    </div>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form id="signup-form" action="/signup" method="post">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password"required>
+            <div class="error-message" id="error-message">
+                Passwords don't match
+            </div>
+            <button type="submit">SIGN UP</button>
+        </form>
+        <div class="login-link">
+            <p>Already have an account? <a href="https://thanhcodervietnam.github.io/basicsign/login.html">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn chặn gửi biểu mẫu mặc định
+
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+            var errorMessage = document.getElementById('error-message');
+
+            if (password !== confirmPassword) {
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+
+                // Xóa các giá trị đã nhập
+                document.getElementById('username').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('password').value = '';
+                document.getElementById('confirm-password').value = '';
+
+                // Giả lập một yêu cầu đăng ký thành công
+                setTimeout(function() {
+                    // Hiển thị thông báo thành công
+                    document.getElementById('notification').style.display = 'block';
+                }, 500); // Giả lập thời gian phản hồi của máy chủ
+            }
+        });
+
+        document.getElementById('confirm-password').addEventListener('input', function() {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+            var errorMessage = document.getElementById('error-message');
+
+            if (password !== confirmPassword) {
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
